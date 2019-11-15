@@ -73,7 +73,7 @@ const TicTacToe = () => {
         break;
       case NO_VEREDICT:
       default:
-        resultMessage = 'No results yet...';
+        resultMessage = '';
         break;
     }
     return resultMessage;
@@ -82,7 +82,7 @@ const TicTacToe = () => {
   return (
     <div>
       <div className="board">
-        {arrayOfEmptySpaces.map((item, index) => <div className="boardCell" onClick={() => drawIcon(index)}>{board[index]}</div>)}
+        {arrayOfEmptySpaces.map((_, index) => <div className="boardCell" onClick={() => drawIcon(index)}>{board[index]}</div>)}
       </div>
       <div className="results">{calculateResults()}</div>
     </div>
