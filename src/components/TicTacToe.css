@@ -1,0 +1,15 @@
+.board {
+  width: 300px;
+  border: 2px solid grey;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.boardCell {
+  width: 98px;
+  height: 98px;
+  border: 1px solid grey;
+  font-size: 80px;
+  text-align: center;
+}
