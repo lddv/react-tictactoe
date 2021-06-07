@@ -1,6 +1,5 @@
 .board {
   width: 300px;
-  border: 2px solid grey;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
