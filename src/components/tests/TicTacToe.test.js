@@ -75,7 +75,35 @@ describe('TicTacToe', () => {
     expect(results).toHaveTextContent('X won the game.');
   });
 
-  it.skip('given that all positions are filled and there is no winner, it should declare it a draw', () => {});
+  it('given that all positions are filled and there is no winner, it should declare it a draw', async () => {
+    const { findByText } = render(<TicTacToe />);
+    fireEvent.click(document.getElementsByClassName('boardCell')[0]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[1]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[2]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[4]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[3]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[5]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[7]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[6]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[8]); // X
 
-  it.skip('given that not all positions are filled and there is a winner, it should not let the next player play', () => {});
+    const results = await waitFor(() => findByText(/draw/));
+    expect(results).toHaveTextContent(/nobody won the game/i);
+  });
+
+  it('given that not all positions are filled and there is a winner, it should not let the next player play', async () => {
+    const { findByText } = render(<TicTacToe />);
+    fireEvent.click(document.getElementsByClassName('boardCell')[0]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[3]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[4]); // X
+    fireEvent.click(document.getElementsByClassName('boardCell')[2]);
+    fireEvent.click(document.getElementsByClassName('boardCell')[8]); // X
+
+    const results = await waitFor(() => findByText(/X won/));
+    expect(results).toHaveTextContent('X won the game.');
+
+    const blankSpace = document.getElementsByClassName('boardCell')[5];
+    fireEvent.click(blankSpace);
+    expect(blankSpace).toHaveTextContent('');
+  });
 });
